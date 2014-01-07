@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<title>FormAPI example</title>
+	<meta charset="UTF-8">
+	<script src="jquery.min.js"></script>
+	<script src="formapi.js"></script>
+	<script src="json2.js"></script>
+	<link href="formapi.css" rel="stylesheet">
+</head>
+<body>
+	<table id="container">
+		<tr>
+			<td>
+				Label 1
+			</td>
+			<td>
+				<input type="text" placeholder="type something" data-name="field1" data-require="true" data-include="true" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Label 2
+			</td>
+			<td>
+				<input type="text" placeholder="this one is not mandatory" data-name="field2" data-include="true" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				
+			</td>
+			<td>
+				<input type="submit" id="submit" />
+			</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		$(function() {
+			$("#submit").click(function() {
+				$("#container").formapi({
+					success:	function(formdata) {
+						// we stringify the JSON to display it
+						alert(JSON.stringify(formdata, null, 4));
+					},
+					fail:		function() {
+						// If the form fails, the fields that are in error will get a class "formapi_flagged"
+						alert("You have errors on your form");
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
